@@ -1,6 +1,6 @@
 import numpy as np
 
-from parser.parser import CALL, CHECK, FOLD, RAISE
+from holdup.parser.player_actions import CALL, CHECK, FOLD, RAISE
 
 
 action_to_int_mappings = {CHECK: 0, CALL: 1, RAISE: 2, FOLD: 3}

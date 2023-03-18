@@ -11,7 +11,7 @@ action_mappings = {"c": ["CHECK", "CALL"], "f": "FOLD", "r": "RAISE"}
 
 row_regex = "STATE:\d:(\w*\/?\w*\/?\w*\/?\w*):(\w{4})\|(\w{4})(\/?\w*\/?\w*\/?\w*)?:(-?\d*)\|(-?\d*):([^|]*)\|(.*)"
 
-def parse_player_actions(actions, player_a, player_b):
+def raw_hand_to_tuple(actions, player_a, player_b):
     by_round = actions.split("/")
 
     def reducer(agg, element):
@@ -21,7 +21,7 @@ def parse_player_actions(actions, player_a, player_b):
             if isinstance(action, list):
                 return CHECK, [(CHECK, 0)] + player_a_actions, player_b_actions, chips, player_b
             if action == FOLD:
-                raise Exception("A bot should never open fold!")
+                return FOLD, [(FOLD, 0)] + player_a_actions, player_b_actions, chips, player_b
             # We need to build up the chips in the raise action over multiple iterations
             return RAISE, player_a_actions, player_b_actions, chips, player_a
 
@@ -90,7 +90,7 @@ def demo_hands():
         STATE:8:r241f:7c5s|6h6s:-100|100:act1_2pn_2016|hugh_2pn_2016"""
 
     matches = list(map(lambda hand: re.findall(row_regex, hand), hands.split("\n")))
-    return [parse_player_actions(row[0][0], row[0][-2], row[0][-1]) for row in matches]
+    return [raw_hand_to_tuple(row[0][0], row[0][-2], row[0][-1]) for row in matches]
 
 if __name__ == '__main__':
     print(demo_hands())

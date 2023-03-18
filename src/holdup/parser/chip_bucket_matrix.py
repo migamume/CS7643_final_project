@@ -1,6 +1,6 @@
 import numpy as np
 
-from parser.parser import CALL, RAISE
+from holdup.parser.player_actions import CALL, RAISE
 
 # Chip counts associated with actions
 # 8x20, subdivided buckets
