@@ -144,7 +144,7 @@ def download_parse_persist(url: str):
         for filename in os.listdir(raw_dir):
             with open(os.path.join(raw_dir, filename), 'r') as raw_file:
                 parsed = map_to_matricies(raw_file.read())
-                np.savetxt(parsed, os.path.join(parsed_dir, f'{filename}_parsed.csv'), delimiter=",")
+                np.savetxt(os.path.join(parsed_dir, f'{filename}_parsed.csv'), parsed, delimiter=",")
 
 if __name__ == "__main__":
     download_parse_persist(urls[0])
