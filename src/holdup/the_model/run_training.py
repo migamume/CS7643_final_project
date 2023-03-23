@@ -16,13 +16,6 @@ Split dataset -> 60 train, 40 test'''
 
 # Set up paths and filenames
 data_dir = 'data_dir/'
-train_dir = 'train_dir/'
-test_dir = 'test_dir/'
-if not os.path.exists(train_dir):
-    os.makedirs(train_dir)
-if not os.path.exists(test_dir):
-    os.makedirs(test_dir)
-
 # Set up train-test split
 num_train = 60000
 num_test = 40000
