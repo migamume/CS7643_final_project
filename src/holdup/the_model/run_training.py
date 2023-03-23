@@ -110,7 +110,7 @@ def train(model, train_loader, num_epochs, weight_decay):
             running_loss += loss.item() * inputs.size(0)
         epoch_loss = running_loss / len(train_loader.dataset)
         print(f"Epoch [{epoch+1}/{num_epochs}], Loss: {epoch_loss:.4f}")
-    Autoencoder.save('autoencoder_model.h5')
+    Autoencoder.save('autoencoder_model.h5') #need to work on this so diff trained models are saved in diff files
     print("Training finished!")
 
 def quick_test(model, test_loader):
