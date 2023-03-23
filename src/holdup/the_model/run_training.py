@@ -142,7 +142,7 @@ def train_and_quick_test(num_hidden_nodes, num_epochs, weight_decay,train_data,t
 Input: 400 (data matrix vectorized)
 Hidden: 20 - hidden level for auto-encoder (this will be the input for the supervised learning model)
 Output: 400 (same size as input)
-Epochs: 10
+Epochs: 20 for softmax
 Loss: MSE function -> L2 norm between input and output plus regularization term
 -> ||input - output||**2(base 2) + lambda||w||**2 (base 2)
 Optimizer: SCG - used for faster time (maybe we can use SGD?)
@@ -155,7 +155,7 @@ flop_weight_decay = 0.001
 Input: 400 (data matrix vectorized) 
 Hidden: 40 - hidden level for auto-encoder (this will be the input for the supervised learning model) 
 Output: 400 (same size as input) 
-Epochs: 30 
+Epochs: 40 for softmax
 Loss: MSE function -> L2 norm between input and output plus regularization term 
 -> ||input - output||**2(base 2) + lambda||w||**2 (base 2) 
 Optimizer: SCG - used for faster time (maybe we can use SGD?) '''
