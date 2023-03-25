@@ -5,6 +5,7 @@ import os
 import re
 import shutil
 import tarfile
+from typing import List
 import urllib.request
 
 from holdup.parser.action_matrix import player_actions_to_matrix, street_int_actions
@@ -46,7 +47,7 @@ To do so, parsed to an easier to use tupled form
 Then use functions to produce each matrix component A, B, C
 Then stack them
 """
-def make_matrix(raw_hand: str):
+def make_matrix(raw_hand: str) -> np.ndarray:
     # Todo: Account for diff regex orders; maybe need to have a fallback
     matches = re.findall(proposed_regex, raw_hand)
 
@@ -89,7 +90,7 @@ def make_matrix(raw_hand: str):
     return a_b_c
 
 
-def map_to_matricies(file_contents):
+def map_to_matricies(file_contents: str) -> List[str]:
     # File contents are newline delimited unsparsed string representations of hands
     return [
         make_matrix(line).flatten()
