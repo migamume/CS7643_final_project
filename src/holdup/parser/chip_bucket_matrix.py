@@ -37,7 +37,7 @@ def street_chip_buckets(full_actions_by_street: List[List[List[Tuple[str, int]]]
         for street_actions in full_actions_by_street
     ]
 
-def chip_buckets_to_matrix(chip_buckets: List[List[int]]) -> np.ndarray:
+def chip_buckets_to_matrix(chip_buckets: List[List[List[int]]]) -> np.ndarray:
     chip_matrix = np.zeros((8, 20))
     for street_idx, buckets in enumerate(chip_buckets):
         start_idx = street_idx * 2
