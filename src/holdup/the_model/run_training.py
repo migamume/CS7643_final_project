@@ -17,7 +17,7 @@ Look at this line: https://github.com/migamume/CS7643_final_project/blob/main/sr
 Split dataset -> 60 train, 40 test'''
 
 # Set up paths and filenames
-data_dir = 'data_dir/'
+data_dir = 'data_dir/' #just choose one of the directories -> read from the raw files
 # Set up train-test split
 num_train = 60000
 num_test = 40000
@@ -27,6 +27,7 @@ test_data = []
 # Iterate over CSV files
 csv_files = [f for f in os.listdir(data_dir) if f.endswith('.csv')]
 random.shuffle(csv_files)
+
 def reducer(agg, hands_dict, reduce_type:str):
     if reduce_type=="last_possible":
         preflop,flop,turn,river=agg
@@ -49,17 +50,17 @@ for i, csv_file in enumerate(csv_files): #This will overwrite for each file
     #now we have a list of dictionaries that gives sorted matrices
     # functools.reduce(lambda agg, hands_dict: agg[0].append(hands_dict[int(Streets.Preflop)]), data)
     per_street_actions = functools.reduce(reducer,data)
-    
+
 preflop, flop, turn, river = per_street_actions
 
     # Reshape matrix to 20x20
     # data = np.reshape(data, (20, 20))
 
     # Decide whether to use file for training or testing
-    if i < num_train:
-        train_data.append(data)
-    else:
-        test_data.append(data)
+if i < num_train:
+    train_data.append(data)
+else:
+    test_data.append(data)
 
 
 # Convert data to PyTorch tensors
