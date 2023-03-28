@@ -13,18 +13,26 @@ Based on the graphs from the paper, is looked like they were using average and h
 I am not clear on what the line is representing. Did they ran all values between the plotted ones, or are they interpelating the values for visual clarity?
 For now, I made it as an option to add a line that interpolates between the data. The line paramter, when set to None, draws no line. Higher values smooth out the interpolation (1 is linear).
 
-| ![epoch_accuracy.png](src\holdup\visualizations\charts\epoch_accuracy.png) | 
-|:--:| 
-| *epoch accuracy* |
+<p align="center">
+  <!-- <img src="src\holdup\visualizations\charts\epoch_accuracy.png" width="350"> -->
+  <img src="./src/holdup/visualizations/charts/epoch_accuracy.png" width="100%"> 
+  <i>epoch accuracy</i>
+</p>
 
-| ![hidden_nodes_accuracy.png](src\holdup\visualizations\charts\hidden_nodes_accuracy.png) | 
-|:--:| 
-| *hidden nodes accuracy* |
+<p align="center">
+  <!-- <img src="./src/holdup/visualizations/charts/hidden_nodes_accuracy.png" width="350"> -->
+  <img src="./src/holdup/visualizations/charts/hidden_nodes_accuracy.png" width="100%"> 
+  <i>hidden nodes accuracy</i>
+</p>
 
-| ![epoch_accuracy.png](src\holdup\visualizations\charts\ref_from_paper_epoch_accuracy.png) | 
-|:--:| 
-| *from paper: epoch accuracy* |
+<p align="center">
+  <!-- <img src="./src/holdup/visualizations/charts/ref_from_paper_epoch_accuracy.png" width="350"> -->
+  <img src="./src/holdup/visualizations/charts/ref_from_paper_epoch_accuracy.png" width="50%"> 
+  <i>from paper: epoch accuracy</i>
+</p>
 
-| ![hidden_nodes_accuracy.png](src\holdup\visualizations\charts\ref_from_paper_hidden_nodes_accuracy.png) | 
-|:--:| 
-| *from paper: hidden nodes accuracy* |
+<p align="center">
+  <!-- <img src="src\holdup\visualizations\charts\ref_from_paper_hidden_nodes_accuracy.png" width="350"> -->
+  <img src="./src/holdup/visualizations/charts/ref_from_paper_hidden_nodes_accuracy.png" width="50%"> 
+  <i>from paper: hidden nodes accuracy</i>
+</p>
