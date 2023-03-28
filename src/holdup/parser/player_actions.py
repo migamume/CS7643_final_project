@@ -77,8 +77,9 @@ def raw_hand_to_tuple(actions, player_a, player_b) -> List[Tuple[str, List[Tuple
         raise Exception("This code should be unreachable")
 
     rounds = [functools.reduce(reducer, _round, ["", [], [], "", player_a]) for _round in by_round]
-    # Todo: Reverse the action lists for each player
-    #   Note: Actually, order doesn't matter if we're just stamping in the matrix.
+    for round in rounds:
+        round[1].reverse()
+        round[2].reverse()
     # Todo: Should also export who player A and B is as columns. They drop them before training
     #   This allows us to potentially train player based models later with no need to refactor this code
     return rounds
