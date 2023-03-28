@@ -7,7 +7,8 @@ import torch.optim as optim
 # from sklearn.model_selection import train_test_split
 import random
 import os
-from holdup.parser.replayable_hand import ReplayableHand
+from holdup.parser.replayable_hand import ReplayableHand, Streets
+import functools
 '''Data prep
 Reconstruct 20x20 matrix
 np or torch.reshape((20,20))
@@ -26,20 +27,40 @@ test_data = []
 # Iterate over CSV files
 csv_files = [f for f in os.listdir(data_dir) if f.endswith('.csv')]
 random.shuffle(csv_files)
-for i, csv_file in enumerate(csv_files):
+def reducer(agg, hands_dict, reduce_type:str):
+    if reduce_type=="last_possible":
+        preflop,flop,turn,river=agg
+        next_of_actions=hands_dict[int(Streets.Preflop)]
+        if len(next_of_actions) != 1:
+            preflop.append(next_of_actions[-1])
+        preflop.append(hands_dict[int(Streets.Preflop)])
+        flop.append(hands_dict[int(Streets.Flop)])
+        turn.append(hands_dict[int(Streets.Turn)])
+        river.append(hands_dict[int(Streets.River)])
+
+    return preflop,flop,turn,river
+
+per_street_actions = ()
+
+for i, csv_file in enumerate(csv_files): #This will overwrite for each file
     # Load CSV file
     # data = np.loadtxt(os.path.join(data_dir, csv_file), delimiter=',')
     data = [ReplayableHand(h).matrix_next_action_by_street() for h in open(csv_file,'r').readlines()]
-    #now we have a dictionary that gives sorted matrices
+    #now we have a list of dictionaries that gives sorted matrices
+    # functools.reduce(lambda agg, hands_dict: agg[0].append(hands_dict[int(Streets.Preflop)]), data)
+    per_street_actions = functools.reduce(reducer,data)
+    
+preflop, flop, turn, river = per_street_actions
 
     # Reshape matrix to 20x20
-    data = np.reshape(data, (20, 20))
+    # data = np.reshape(data, (20, 20))
 
     # Decide whether to use file for training or testing
     if i < num_train:
         train_data.append(data)
     else:
         test_data.append(data)
+
 
 # Convert data to PyTorch tensors
 train_tensor = torch.tensor(train_data)
