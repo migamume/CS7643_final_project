@@ -7,6 +7,7 @@ import torch.optim as optim
 # from sklearn.model_selection import train_test_split
 import random
 import os
+from holdup.parser.replayable_hand import ReplayableHand
 '''Data prep
 Reconstruct 20x20 matrix
 np or torch.reshape((20,20))
@@ -27,7 +28,9 @@ csv_files = [f for f in os.listdir(data_dir) if f.endswith('.csv')]
 random.shuffle(csv_files)
 for i, csv_file in enumerate(csv_files):
     # Load CSV file
-    data = np.loadtxt(os.path.join(data_dir, csv_file), delimiter=',')
+    # data = np.loadtxt(os.path.join(data_dir, csv_file), delimiter=',')
+    data = [ReplayableHand(h).matrix_next_action_by_street() for h in open(csv_file,'r').readlines()]
+    #now we have a dictionary that gives sorted matrices
 
     # Reshape matrix to 20x20
     data = np.reshape(data, (20, 20))
