@@ -1,5 +1,6 @@
 import functools
 import re
+from typing import List, Tuple
 
 
 CALL = "CALL"
@@ -11,7 +12,11 @@ action_mappings = {"c": ["CHECK", "CALL"], "f": "FOLD", "r": "RAISE"}
 
 row_regex = "STATE:\d:(\w*\/?\w*\/?\w*\/?\w*):(\w{4})\|(\w{4})(\/?\w*\/?\w*\/?\w*)?:(-?\d*)\|(-?\d*):([^|]*)\|(.*)"
 
-def raw_hand_to_tuple(actions, player_a, player_b):
+"""
+Output shape is:
+Last action (used internally), Player A actions, Player B actions, Chips holder (used internally), Last player (used internally)
+"""
+def raw_hand_to_tuple(actions, player_a, player_b) -> List[Tuple[str, List[Tuple[str, int]], List[Tuple[str, int]], str, str]]:
     by_round = actions.split("/")
 
     def reducer(agg, element):
@@ -72,8 +77,9 @@ def raw_hand_to_tuple(actions, player_a, player_b):
         raise Exception("This code should be unreachable")
 
     rounds = [functools.reduce(reducer, _round, ["", [], [], "", player_a]) for _round in by_round]
-    # Todo: Reverse the action lists for each player
-    #   Note: Actually, order doesn't matter if we're just stamping in the matrix.
+    for round in rounds:
+        round[1].reverse()
+        round[2].reverse()
     # Todo: Should also export who player A and B is as columns. They drop them before training
     #   This allows us to potentially train player based models later with no need to refactor this code
     return rounds

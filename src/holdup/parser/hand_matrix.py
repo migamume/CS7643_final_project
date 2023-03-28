@@ -4,10 +4,10 @@ import numpy as np
 rank_mappings = {'A': 0, 'K': 1, 'Q': 2, 'J': 3, 'T': 4, '9': 5, '8': 6, '7': 7, '6': 8, '5': 9, '4': 10, '3': 11, '2': 12}
 suit_mappings = {'c': 0, 'd': 1, 'h': 2, 's': 3}
 
-def vector_location(hand):
+def vector_location(hand: str) -> np.ndarray:
     return np.array([suit_mappings[hand[1]], rank_mappings[hand[0]]])
 
-def make_hand_matrix(community_cards, player_cards):
+def make_hand_matrix(community_cards: str, player_cards: str) -> np.ndarray:
     deck = np.zeros((4,13))
     # Turn slash separated string of streets into a single string of cards
     # Then join all cards and stride with len 2 to stride over one card at a time
