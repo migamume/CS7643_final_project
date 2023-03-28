@@ -14,30 +14,25 @@ I am not clear on what the line is representing. Did they ran all values between
 For now, I made it as an option to add a line that interpolates between the data. The line paramter, when set to None, draws no line. Higher values smooth out the interpolation (1 is linear).
 
 <p align="center">
-  <!-- <img src="src\holdup\visualizations\charts\epoch_accuracy.png" width="350"> -->
   <img src="./charts/epoch_accuracy.png" width="50%"> 
   <br>
   <i>epoch accuracy</i>
 </p>
-
  
 <p align="center">
-  <!-- <img src="./src/holdup/visualizations/charts/hidden_nodes_accuracy.png" width="350"> -->
   <img src="./charts/hidden_nodes_accuracy.png" width="50%"> 
+  <br>
   <i>hidden nodes accuracy</i>
-  <br>
 </p>
 
 <p align="center">
-  <!-- <img src="./src/holdup/visualizations/charts/ref_from_paper_epoch_accuracy.png" width="350"> -->
   <img src="./charts/ref_from_paper_epoch_accuracy.png" width="50%"> 
-  <i>from paper: epoch accuracy</i>
   <br>
+  <i>from paper: epoch accuracy</i>
 </p>
 
 <p align="center">
-  <!-- <img src="src\holdup\visualizations\charts\ref_from_paper_hidden_nodes_accuracy.png" width="350"> -->
   <img src="./charts/ref_from_paper_hidden_nodes_accuracy.png" width="50%"> 
-  <i>from paper: hidden nodes accuracy</i>
   <br>
+  <i>from paper: hidden nodes accuracy</i>
 </p>
