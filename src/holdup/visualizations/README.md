@@ -19,17 +19,20 @@ For now, I made it as an option to add a line that interpolates between the data
   <i>epoch accuracy</i>
 </p>
 
+
 <p align="center">
   <!-- <img src="./src/holdup/visualizations/charts/hidden_nodes_accuracy.png" width="350"> -->
-  <img src=".charts/hidden_nodes_accuracy.png" width="50%"> 
+  <img src="./charts/hidden_nodes_accuracy.png" width="50%"> 
   <i>hidden nodes accuracy</i>
 </p>
+
 
 <p align="center">
   <!-- <img src="./src/holdup/visualizations/charts/ref_from_paper_epoch_accuracy.png" width="350"> -->
   <img src="./charts/ref_from_paper_epoch_accuracy.png" width="50%"> 
   <i>from paper: epoch accuracy</i>
 </p>
+
 
 <p align="center">
   <!-- <img src="src\holdup\visualizations\charts\ref_from_paper_hidden_nodes_accuracy.png" width="350"> -->
