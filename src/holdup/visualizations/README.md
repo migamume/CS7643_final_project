@@ -1,39 +1,30 @@
-# CS7643_final_project
-For our course' final project
+# Visualization
 
-# Running locally
-This repository is now an installable python package. You should activate your virtualenv / conda environment (TODO: Conda) and then install it for local development like so:
+Currently, the generate_charts.py contains two method to generate plots similar to the one's in "Auto-encoder neural network based prediction of Texas poker opponent's behavior":
 
-`pip install -e ./`
+hidden_nodes_plot(data, arrow_x, filepath=None, line=2)
 
-This will install a package named `holdup` in your python environment.
+and
 
-### Logging Note
-David reused some old logging code that expects your environment to have a `LOG_CFG_PATH` specified. This should point to the `logcfg.yaml` file. I could probably have made this a resource instead, but I haven't gotten around to it. I modified the code so it falls back to a base logger if you haven't set up this env var. But if you want to use the logging config, run this from terminal:
+epoch_plot(data, arrow_x, filepath=None, line=2)
 
-`export LOG_CFG_PATH='/path/to/CS7643_final_project/logcfg.yaml'
+Where data is formated as a dictionary where the keys (for instance, number of hidden nodes) will be X and the accuracy values will determine Y. 
+Based on the graphs from the paper, is looked like they were using average and hi/low bars. 
+I am not clear on what the line is representing. Did they ran all values between the plotted ones, or are they interpelating the values for visual clarity?
+For now, I made it as an option to add a line that interpolates between the data. The line paramter, when set to None, draws no line. Higher values smooth out the interpolation (1 is linear).
 
-for me this is
+| ![epoch_accuracy.png](src\holdup\visualizations\charts\epoch_accuracy.png) | 
+|:--:| 
+| *epoch accuracy* |
 
-`export LOG_CFG_PATH='/home/david/development/omscs/dl/CS7643_final_project/logcfg.yaml'
+| ![hidden_nodes_accuracy.png](src\holdup\visualizations\charts\hidden_nodes_accuracy.png) | 
+|:--:| 
+| *hidden nodes accuracy* |
 
-## From terminal
-After you have installed the package for local development, run as you would any other python file.
+| ![epoch_accuracy.png](src\holdup\visualizations\charts\ref_from_paper_epoch_accuracy.png) | 
+|:--:| 
+| *from paper: epoch accuracy* |
 
-### Downloading data
-Rather than commit GBs of data, I setup a gitignore to ignore the data dirs. Each of us will need to download and parse the same datasets.
-
-To do so, run the `data_prepper` like so:
-
-`python src/holdup/parser/data_prepper.py`
-
-## Development in Notebooks
-If you use jupyter notebooks for development, you can now install the package and then import from it like any other.
-
-Here's how to make your conda env available in Jupyter: https://medium.com/@nrk25693/how-to-add-your-conda-environment-to-your-jupyter-notebook-in-just-4-steps-abeab8b8d084
-
-# TODO
-* Conda integration
-* ................
-* ...
-* ...
+| ![hidden_nodes_accuracy.png](src\holdup\visualizations\charts\ref_from_paper_hidden_nodes_accuracy.png) | 
+|:--:| 
+| *from paper: hidden nodes accuracy* |
