@@ -161,3 +161,5 @@ cython_debug/
 
 # Ignore the "data" dir. We should each pull down the GBs of data instead of committing to GH
 **/data
+.DS_Store
+
