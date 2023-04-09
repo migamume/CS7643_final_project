@@ -42,6 +42,12 @@ class ReplayableHand:
     def matrix_next_action_by_street(self) -> Dict[int, List[Tuple[np.ndarray, Tuple[bool, int]]]]:
         matches = re.findall(self._raw_hand_regex, self.raw_hand)
 
+        actions_by_round = {street: [] for street in range(int(Streets.Preflop), int(Streets.River) + 1)}
+
+        if len(matches) == 0:
+            # Note; Mapping failed matches to empty actions.
+            return actions_by_round
+
         action, player_a_cards, player_b_cards, community_cards, _, _, player_a, player_b = matches[0]
         tupled_hand = raw_hand_to_tuple(action, player_a, player_b)
 
@@ -52,8 +58,6 @@ class ReplayableHand:
         player_b_actions = [round_actions[1] for round_actions in _street_int_actions]
 
         max_rounds = max(len(player_a_actions), len(player_b_actions))
-
-        actions_by_round = {street: [] for street in range(int(Streets.Preflop), int(Streets.River) + 1)}
 
         for round_idx in range(max_rounds):
             num_actions_this_round = len(player_a_actions[round_idx]) + len(player_b_actions[round_idx])
@@ -124,8 +128,13 @@ class ReplayableHand:
                     if is_last_round:
                         next_action = -1
                     else:
-                        # A new round always starts with player_a
-                        next_action = player_a_actions[round_idx + 1][0]
+                        try:
+                            # A new round always starts with player_a
+                            next_action = player_a_actions[round_idx + 1][0]
+                        except IndexError:
+                            # It is possible that there are no chips remaining (ie: there was an all in and call)
+                            # This can create a scnario where a non-final round contains the last action
+                            next_action = -1
 
                 actions_by_round[round_idx].append((a_b_c, (next_action_crosses_round_boundary, next_action)))
 
