@@ -17,6 +17,7 @@ class Autoencoder(nn.Module):
             nn.Linear(num_hidden_nodes, 400),
             nn.Sigmoid()
         )
+        
 
     def forward(self, x):
         encoded = self.encoder(x) #hidden level for auto-encoder (this will be the input for the supervised learning model)
