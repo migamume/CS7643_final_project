@@ -46,7 +46,6 @@ def get_data(dataset, stage):
     return [(x[0], x[1][1]) for x in stage_data]
 
 
-#MAKE SURE YOUR DIRECTORY PATH IS ACCURATE FIRST THOUGH
 with open('last_possible.pickle', 'rb') as last_possible_pickle:
     last_possible_dataset = pickle.load(last_possible_pickle)
 
@@ -91,20 +90,12 @@ def train(model, train_loader, num_epochs, weight_decay, pftr='stage_name'):
     for epoch in range(num_epochs):
         running_loss = 0.0
         for data in train_loader:
-            # print('loading data: ', data)
             inputs, labels = data
-            # print('input data: ', inputs.dtype)
-            # print('labels data: ', labels)
-            # print('labels datatype: ', labels.dtype)
-            # labels = labels.long()
             inputs = inputs.float()
-            # print('input data: ', inputs.dtype)
             optimizer.zero_grad()
             batch_size, _, _ = inputs.size()
             inputs = inputs.view(batch_size, -1)
             outputs = model(inputs)
-            # print('the ouput: ', outputs)
-
             loss = criterion(outputs, labels)
             loss.backward()
             optimizer.step()
@@ -184,18 +175,12 @@ river_weight_decay = 0.001
 # train_data and test_data should be torch.utils.data.TensorDataset objects
 
 
-# Train the model on preflop stage
+
 if __name__ == "__main__":
+    #the authors didn't visualize results from preflop, so the data from this would be new
     train_and_quick_test(flop_hidden_nodes, flop_epochs, flop_weight_decay,train_preflop,test_preflop,pftr='preflop_last_possible')
 
-# Train the model on Flop stage
-if __name__ == "__main__":
+    #train/test models on flop, turn, river datasets
     train_and_quick_test(flop_hidden_nodes, flop_epochs, flop_weight_decay,train_flop,test_flop,pftr='flop_last_possible')
-
-# Train the model on Turn stage
-if __name__ == "__main__":
     train_and_quick_test(turn_hidden_nodes, turn_epochs, turn_weight_decay,train_turn,test_turn,pftr='turn_last_possible')
-
-# Train the model on River stage
-if __name__ == "__main__":
     train_and_quick_test(river_hidden_nodes, river_epochs, river_weight_decay,train_river,test_river,pftr='river_last_possible')
