@@ -29,14 +29,20 @@ river: List[Matrix, Integer: Supervised Target]
   <br>
   <br>
   <br>
-2. You can run training and testing models for each street. Training will produce a learning curve and save the model. Test prints the accuracy of the model.
-(For the best model hyperparameters according to the authors)
+2. You can run training and testing models for each street. 
+
+  * Training will produce a learning curve and save the model. 
+  * Test prints the accuracy of the model.
+
+The following curves are for the best model hyperparameters according to the authors except for pre-flop (they didn't include pre-flop results in the paper)
+
 <p align="center">
   <img src="./for_readme/preflop_last_possible_lc_epoch_loss.png" width="50%"> 
   <br>
   <i>Learning curve for preflop with last possible action. Accuracy: 80.18%</i>
   <br>
   <br>
+
 
 <p align="center">
   <img src="./for_readme/flop_last_possible_lc_epoch_loss.png" width="50%"> 
