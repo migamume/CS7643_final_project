@@ -27,7 +27,6 @@ river: List[Matrix, Integer: Supervised Target]
 <p align="center">
   <img src="./for_readme/train_test_datasets.png" width="30%"> 
   <br>
-  <i>hidden nodes accuracy</i>
   <br>
   <br>
 2. You can run training and testing models for each street. Training will produce a learning curve and save the model. Test prints the accuracy of the model.
