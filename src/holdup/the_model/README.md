@@ -33,64 +33,27 @@ river: List[Matrix, Integer: Supervised Target]
   * Training will produce a learning curve and save the model. 
   * Test prints the accuracy of the model.
 
-The following curves are for the best model hyperparameters according to the authors except for pre-flops (they didn't include pre-flop results in the paper)
+The following learning curves are for the best model hyperparameters according to the authors except for pre-flops (they didn't include pre-flop results in the paper)
 
-<p align="center">
-  <img src="./for_readme/preflop_last_possible_lc_epoch_loss.png" width="50%"> 
-  <br>
-  <i>Learning curve for preflop with last possible action. Accuracy: 80.18%</i>
-  <br>
-  <br> </p>
+### Last possible action datasets
 
-<p align="center">
-  <img src="./for_readme/flop_last_possible_lc_epoch_loss.png" width="50%"> 
-  <br>
-  <i>Learning curve for flop with last possible action. Accuracy: 81.97%</i>
-  <br>
-  <br> </p>
-
-<p align="center">
-  <img src="./for_readme/turn_last_possible_lc_epoch_loss.png" width="50%"> 
-  <br>
-  <i>Learning curve for turn with last possible action. Accuracy: 90.21%</i>
-  <br>
-  <br> </p>
-
-<p align="center">
-  <img src="./for_readme/turn_last_possible_lc_epoch_loss.png" width="50%"> 
-  <br>
-  <i>Learning curve for river with last possible action. Accuracy: 87.96%</i>
-  <br>
-  <br> </p>
+| Pre-flop Accuracy: 80.18% | Flop Accuracy: 81.97%|
+| :--------: | :--------: |
+| ![Image 1](./for_readme/preflop_last_possible_lc_epoch_loss.png) | ![Image 2](./for_readme/flop_last_possible_lc_epoch_loss.png) |
+| **Turn Accuracy: 90.21%**| **River Accuracy: 87.96%**|
+| ![Image 1](./for_readme/turn_last_possible_lc_epoch_loss.png) | ![Image 2](./for_readme/river_last_possible_lc_epoch_loss.png) |
 
 
-<p align="center">
-  <img src="./for_readme/preflop_last_action_lc_epoch_loss.png" width="50%"> 
-  <br>
-  <i>Learning curve for preflop with last action. Accuracy: 69.23%</i>
-  <br>
-  <br> </p>
+### Last action datasets
 
-<p align="center">
-  <img src="./for_readme/flop_last_action_lc_epoch_loss.png" width="50%"> 
-  <br>
-  <i>Learning curve for flop with last action. Accuracy: 65.82%</i>
-  <br>
-  <br> </p>
+| Pre-flop Accuracy: 69.23% | Flop Accuracy: 65.82%|
+| :--------: | :--------: |
+| ![Image 1](./for_readme/preflop_last_action_lc_epoch_loss.png) | ![Image 2](./for_readme/flop_last_action_lc_epoch_loss.png) |
+| **Turn Accuracy: 78.84%**| **River Accuracy: 77.41%**|
+| ![Image 1](./for_readme/turn_last_action_lc_epoch_loss.png) | ![Image 2](./for_readme/river_last_action_lc_epoch_loss.png) |
 
-<p align="center">
-  <img src="./for_readme/turn_last_action_lc_epoch_loss.png" width="50%"> 
-  <br>
-  <i>Learning curve for turn with last action. Accuracy: 78.84%</i>
-  <br>
-  <br> </p>
 
-<p align="center">
-  <img src="./for_readme/turn_last_action_lc_epoch_loss.png" width="50%"> 
-  <br>
-  <i>Learning curve for river with last action. Accuracy: 77.41%</i>
-  <br>
-  <br> </p>
+
 
 ## TODO: visualizations with tuning hyperparameters
 ## TODO: WRITE THE REPORT
