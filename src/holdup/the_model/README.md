@@ -26,8 +26,8 @@ river: List[Matrix, Integer: Supervised Target]
 
     <table>
       <tr>
-        <td><img src="./for_readme/train_test_datasets.png" width="30%" alt="Last possible action datasets "></td>
-        <td><img src="./for_readme/train_test_datasets_2.png" width="30%" alt="Last action datasets"></td>
+        <td><img src="./for_readme/train_test_datasets.png" alt="Last possible action datasets "></td>
+        <td><img src="./for_readme/train_test_datasets_2.png" alt="Last action datasets"></td>
       </tr>
     </table>
 
