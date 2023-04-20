@@ -28,7 +28,7 @@ river: List[Matrix, Integer: Supervised Target]
   <img src="./for_readme/train_test_datasets.png" width="30%"> 
   <br>
   <br>
-  <br>
+  <br> </p>
 2. You can run training and testing models for each street. 
 
   * Training will produce a learning curve and save the model. 
@@ -41,7 +41,7 @@ The following curves are for the best model hyperparameters according to the aut
   <br>
   <i>Learning curve for preflop with last possible action. Accuracy: 80.18%</i>
   <br>
-  <br>
+  <br> </p>
 
 
 <p align="center">
@@ -49,21 +49,21 @@ The following curves are for the best model hyperparameters according to the aut
   <br>
   <i>Learning curve for flop with last possible action. Accuracy: 81.97%</i>
   <br>
-  <br>
+  <br> </p>
 
 <p align="center">
   <img src="./for_readme/turn_last_possible_lc_epoch_loss.png" width="50%"> 
   <br>
   <i>Learning curve for turn with last possible action. Accuracy: 90.21%</i>
   <br>
-  <br>
+  <br> </p>
 
 <p align="center">
   <img src="./for_readme/turn_last_possible_lc_epoch_loss.png" width="50%"> 
   <br>
   <i>Learning curve for river with last possible action. Accuracy: 87.96%</i>
   <br>
-  <br>
+  <br> </p>
 
 ## TODO: visualizations with tuning hyperparameters
 ## TODO: WRITE THE REPORT
