@@ -25,13 +25,13 @@ river: List[Matrix, Integer: Supervised Target]
 1. Prepares the data from the pickles for training.  You can switch the pickle file depending on which dataset you want to work with.
 
 <p align="center">
-  <img src="./for_readme/train_test_datasets.png" width="50%"> 
+  <img src="./for_readme/train_test_datasets.png" width="30%"> 
   <br>
   <i>hidden nodes accuracy</i>
   <br>
   <br>
 2. You can run training and testing models for each street. Training will produce a learning curve and save the model. Test prints the accuracy of the model.
-(For the best model hyperparameters according to the authors; TODO: visualizations with tuning hyperparameters)
+(For the best model hyperparameters according to the authors)
 <p align="center">
   <img src="./for_readme/preflop_last_possible_lc_epoch_loss.png" width="50%"> 
   <br>
@@ -59,3 +59,5 @@ river: List[Matrix, Integer: Supervised Target]
   <i>Learning curve for river with last possible action. Accuracy: 87.96%</i>
   <br>
   <br>
+
+## TODO: visualizations with tuning hyperparameters
