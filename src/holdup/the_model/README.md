@@ -24,12 +24,9 @@ river: List[Matrix, Integer: Supervised Target]
 # Prepare data for training and testing + training and testing in run_training.py
 1. Prepares the data from the pickles for training.  You can switch the pickle file depending on which dataset you want to work with.
 
-    <table>
-      <tr>
-        <td><img src="./for_readme/train_test_datasets.png" alt="Last possible action datasets "></td>
-        <td><img src="./for_readme/train_test_datasets_2.png" alt="Last action datasets"></td>
-      </tr>
-    </table>
+| Last possible action datasets | Last action datasets|
+| :-------- | :-------- |
+| ![Image 1](./for_readme/train_test_datasets.png) | ![Image 2](./for_readme/train_test_datasets_2.png) |
 
 2. You can run training and testing models for each street. 
 
