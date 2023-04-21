@@ -13,6 +13,8 @@ Based on the graphs from the paper, is looked like they were using average and h
 I am not clear on what the line is representing. Did they ran all values between the plotted ones, or are they interpelating the values for visual clarity?
 For now, I made it as an option to add a line that interpolates between the data. The line paramter, when set to None, draws no line. Higher values smooth out the interpolation (1 is linear).
 
+There is a notebook called Generate_viz_dict that generates two different dictionaries: d_nodes and d_epochs that show the different accuracies for the preflop, flop, turn, and river data sets using different number of hidden nodes and different number of epochs, correspondingly. The notebook takes time to run so I have already saved both dictionaries as json files under the json_dictionaries directory. There is code in generate_charts.py to access the dictionary json files and convert them to python dictionaries.
+
 <p align="center">
   <img src="./charts/hidden_nodes_accuracy.png" width="50%"> 
   <br>

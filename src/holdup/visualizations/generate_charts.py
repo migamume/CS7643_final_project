@@ -1,7 +1,18 @@
 import matplotlib.pyplot as plt
 import numpy as np
 from scipy.interpolate import make_interp_spline
+import json 
 
+with open('src/holdup/visualizations/json_dictionaries/d_nodes.json') as file:
+    d_nodes = json.load(file)
+
+with open('src/holdup/visualizations/json_dictionaries/d_epochs.json') as file:
+    d_epochs = json.load(file)
+
+dummy_nodes_data = d_nodes
+dummy_epoch_data = d_epochs
+
+'''
 dummy_nodes_data = {
     10: (93, 87, 95),
     20: (97, 98, 99),
@@ -23,6 +34,8 @@ dummy_epoch_data = {
     50: (98, 98, 99),
     60: (98, 98, 99),
 }
+
+'''
 
 def hidden_nodes_plot(data, arrow_x, filepath=None, line=2):
     x = list(data.keys())
