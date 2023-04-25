@@ -54,6 +54,7 @@ flop_data = get_data(last_possible_dataset, "flop")
 turn_data = get_data(last_possible_dataset, "turn")
 river_data = get_data(last_possible_dataset, "river")
 
+#training set 60%, validation set 20%, testing set 20%
 def separate_train_test_val(street_data):
     n_train = int(len(street_data)*0.6)
     n_val = int(len(street_data)*0.2)

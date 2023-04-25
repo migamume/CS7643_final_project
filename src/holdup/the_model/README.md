@@ -23,10 +23,11 @@ river: List[Matrix, Integer: Supervised Target]
 
 # Prepare data for training and testing + training and testing in run_training.py
 1. Prepares the data from the pickles for training.  You can switch the pickle file depending on which dataset you want to work with.
-
+60% training, 20% validation, 20% testing
+   
 | Last possible action datasets | Last action datasets|
 | :-------- | :-------- |
-| ![Image 1](./for_readme/train_test_datasets.png) | ![Image 2](./for_readme/train_test_datasets_2.png) |
+| ![Image 1](./for_readme/train_val_test_lp.png) | ![Image 2](./for_readme/train_val_test_la.png) |
 
 2. You can run training and testing models for each street. 
 
@@ -37,19 +38,19 @@ The following learning curves are for the best model hyperparameters according t
 
 ### Last possible action datasets
 
-| Pre-flop Accuracy: 80.18% | Flop Accuracy: 81.97%|
+| Pre-flop Accuracy: 79.31% | Flop Accuracy: 83.21%|
 | :--------: | :--------: |
 | ![Image 1](./for_readme/preflop_last_possible_lc_epoch_loss.png) | ![Image 2](./for_readme/flop_last_possible_lc_epoch_loss.png) |
-| **Turn Accuracy: 90.21%**| **River Accuracy: 87.96%**|
+| **Turn Accuracy: 90.57%**| **River Accuracy: 87.41%**|
 | ![Image 1](./for_readme/turn_last_possible_lc_epoch_loss.png) | ![Image 2](./for_readme/river_last_possible_lc_epoch_loss.png) |
 
 
 ### Last action datasets
 
-| Pre-flop Accuracy: 69.23% | Flop Accuracy: 65.82%|
+| Pre-flop Accuracy: 69.52% | Flop Accuracy: 65.55%|
 | :--------: | :--------: |
 | ![Image 1](./for_readme/preflop_last_action_lc_epoch_loss.png) | ![Image 2](./for_readme/flop_last_action_lc_epoch_loss.png) |
-| **Turn Accuracy: 78.84%**| **River Accuracy: 77.41%**|
+| **Turn Accuracy: 79.91%**| **River Accuracy: 75.87%**|
 | ![Image 1](./for_readme/turn_last_action_lc_epoch_loss.png) | ![Image 2](./for_readme/river_last_action_lc_epoch_loss.png) |
 
 
