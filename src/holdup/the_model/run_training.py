@@ -54,25 +54,27 @@ flop_data = get_data(last_possible_dataset, "flop")
 turn_data = get_data(last_possible_dataset, "turn")
 river_data = get_data(last_possible_dataset, "river")
 
-def separate_train_test(street_data):
+def separate_train_test_val(street_data):
     n_train = int(len(street_data)*0.6)
+    n_val = int(len(street_data)*0.2)
     train_set = street_data[:n_train]
-    test_set = street_data[n_train:]
-    return train_set,test_set
+    val_set = street_data[n_train:n_train+n_val]
+    test_set = street_data[n_train+n_val:]
+    return train_set, val_set, test_set
 
-train_preflop, test_preflop =separate_train_test(preflop_data)
+train_preflop, val_preflop, test_preflop =separate_train_test_val(preflop_data)
 print("preflop_train_data_size: {}".format(len(train_preflop)))
 print("preflop_test_data_size: {}".format(len(test_preflop)))
 
-train_flop, test_flop=separate_train_test(flop_data)
+train_flop,val_flop, test_flop=separate_train_test_val(flop_data)
 print("flop_train_data_size: {}".format(len(train_flop)))
 print("flop_test_data_size: {}".format(len(test_flop)))
 
-train_turn, test_turn=separate_train_test(turn_data)
+train_turn,val_turn, test_turn=separate_train_test_val(turn_data)
 print("turn_train_data_size: {}".format(len(train_turn)))
 print("turn_test_data_size: {}".format(len(test_turn)))
 
-train_river, test_river=separate_train_test(river_data)
+train_river,val_river, test_river=separate_train_test_val(river_data)
 print("river_train_data_size: {}".format(len(train_river)))
 print("river_test_data_size: {}".format(len(test_river)))
 
@@ -83,10 +85,11 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 # Create an instance of the autoencoder
 # model = Autoencoder(num_hidden_nodes).to(device)
 
-def train(model, train_loader, num_epochs, weight_decay, pftr='stage_name'):
-    criterion = nn.CrossEntropyLoss() #changed to cross entropy loss for classification based tasks (semi-supervised)
+def train(model, train_loader, val_loader, num_epochs, weight_decay, pftr='stage_name'):
+    criterion = nn.CrossEntropyLoss()
     optimizer = optim.Adam(model.parameters(), weight_decay=weight_decay)
     train_losses = []
+    val_losses = []
     for epoch in range(num_epochs):
         running_loss = 0.0
         for data in train_loader:
@@ -102,14 +105,29 @@ def train(model, train_loader, num_epochs, weight_decay, pftr='stage_name'):
             running_loss += loss.item() * inputs.size(0)
         epoch_loss = running_loss / len(train_loader.dataset)
         train_losses.append(epoch_loss)
-        print(f"Epoch [{epoch+1}/{num_epochs}], Loss: {epoch_loss:.4f}")
+        print(f"Epoch [{epoch+1}/{num_epochs}], Training Loss: {epoch_loss:.4f}")
+        with torch.no_grad():
+            running_loss = 0.0
+            for data in val_loader:
+                inputs, labels = data
+                inputs = inputs.float()
+                batch_size, _, _ = inputs.size()
+                inputs = inputs.view(batch_size, -1)
+                outputs = model(inputs)
+                loss = criterion(outputs, labels)
+                running_loss += loss.item() * inputs.size(0)
+            epoch_loss = running_loss / len(val_loader.dataset)
+            val_losses.append(epoch_loss)
+            print(f"Epoch [{epoch+1}/{num_epochs}], Validation Loss: {epoch_loss:.4f}")
     # Autoencoder.save(save_the_model, bbox_inches='tight')
     print("Training finished!")
     # plot the learning curve
-    plt.plot(range(1, num_epochs + 1), train_losses)
-    plt.title('Training Loss')
+    plt.plot(range(1, num_epochs + 1), train_losses, label='Training Loss')
+    plt.plot(range(1, num_epochs + 1), val_losses, label='Validation Loss')
+    plt.title('Training and Validation Loss')
     plt.xlabel('Epoch')
     plt.ylabel('Loss')
+    plt.legend()
     s = str(pftr) + '_lc_epoch_loss'
     plt.savefig(s)
     plt.clf()
@@ -129,13 +147,15 @@ def quick_test(model,test_loader):
             correct += (predicted == labels).sum().item()
     print(f"Accuracy on test set: {correct / total * 100:.2f}%")
 
+# Re. Batch sizes Typically, we should test for [8,16,32,64,128,256,512,1024]
 
-def train_and_quick_test(num_hidden_nodes, num_epochs, weight_decay,train_data,test_data, pftr):
+def train_and_quick_test( num_hidden_nodes, num_epochs, weight_decay,train_data,val_data, test_data,batch_size, pftr):
     # Define the model
     model = Autoencoder(num_hidden_nodes).to(device)
-    train_loader = torch.utils.data.DataLoader(train_data, batch_size=20, shuffle=True)
-    test_loader = torch.utils.data.DataLoader(test_data, batch_size=20, shuffle=False)
-    train(model, train_loader, num_epochs, weight_decay,pftr)
+    train_loader = torch.utils.data.DataLoader(train_data, batch_size=batch_size, shuffle=True)
+    val_loader = torch.utils.data.DataLoader(val_data, batch_size=batch_size, shuffle=True)
+    test_loader = torch.utils.data.DataLoader(test_data, batch_size=batch_size, shuffle=False)
+    train(model, train_loader,val_loader, num_epochs, weight_decay,pftr)
     # Test the model
     quick_test(model,test_loader)
 
@@ -178,9 +198,9 @@ river_weight_decay = 0.001
 
 if __name__ == "__main__":
     #the authors didn't visualize results from preflop, so the data from this would be new
-    train_and_quick_test(flop_hidden_nodes, flop_epochs, flop_weight_decay,train_preflop,test_preflop,pftr='preflop_last_possible')
+    train_and_quick_test( flop_hidden_nodes, flop_epochs, flop_weight_decay,train_preflop,val_preflop, test_preflop,32,pftr='preflop_last_possible')
 
     #train/test models on flop, turn, river datasets
-    train_and_quick_test(flop_hidden_nodes, flop_epochs, flop_weight_decay,train_flop,test_flop,pftr='flop_last_possible')
-    train_and_quick_test(turn_hidden_nodes, turn_epochs, turn_weight_decay,train_turn,test_turn,pftr='turn_last_possible')
-    train_and_quick_test(river_hidden_nodes, river_epochs, river_weight_decay,train_river,test_river,pftr='river_last_possible')
+    train_and_quick_test(flop_hidden_nodes, flop_epochs, flop_weight_decay,train_flop,val_flop,test_flop,32,pftr='flop_last_possible')
+    train_and_quick_test(turn_hidden_nodes, turn_epochs, turn_weight_decay,train_turn,val_turn,test_turn,32,pftr='turn_last_possible')
+    train_and_quick_test(river_hidden_nodes, river_epochs, river_weight_decay,train_river,val_river,test_river,32,pftr='river_last_possible')
