@@ -13,6 +13,8 @@ Based on the graphs from the paper, is looked like they were using average and h
 I am not clear on what the line is representing. Did they ran all values between the plotted ones, or are they interpelating the values for visual clarity?
 For now, I made it as an option to add a line that interpolates between the data. The line paramter, when set to None, draws no line. Higher values smooth out the interpolation (1 is linear).
 
+There is a notebook called Generate_viz_dict that demonstrates how the model was tuned to obtain hyperparameters that was used in the final model. The second part of the notebook produces dictionaries that will be used in generate_charts.py to produce visualizations.
+
 <p align="center">
   <img src="./charts/hidden_nodes_accuracy.png" width="50%"> 
   <br>

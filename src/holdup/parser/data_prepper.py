@@ -23,7 +23,7 @@ logger = LogProvider.get_logger()
 proposed_regex = "STATE:\d:(\w*\/?\w*\/?\w*\/?\w*):(\w{4})\|(\w{4})(\/?\w*\/?\w*\/?\w*)?:(-?\d*)\|(-?\d*):([^|]*)\|(.*)"
 
 urls = [
-    "http://www.computerpokercompetition.org/downloads/competitions/2011/logs/acpc_2011_2p_nolimit.tar.bz2"
+    "http://www.computerpokercompetition.org/downloads/competitions/2011/logs/acpc_2011_2p_nolimit.tar.bz2", 'http://www.computerpokercompetition.org/downloads/competitions/2016/logs/logs_2pn_2016.tar.bz2'
     # Add more URLs as needed
 ]
 
@@ -148,4 +148,5 @@ def download_parse_persist(url: str):
                 np.savetxt(os.path.join(parsed_dir, f'{filename}_parsed.csv'), parsed, delimiter=",")
 
 if __name__ == "__main__":
-    download_parse_persist(urls[0])
+    for i in range (len(urls)):
+        download_parse_persist(urls[i])
