@@ -16,7 +16,7 @@ We could also visualize the distribution of sizes across the dataset to inform c
 May need to normalize across datasets for valid comparison
 Todo: Make configurable
 """
-max_value=10000 # Max I saw in first 10 was 1k
+max_value= 20_000 # Verified max val is 20k                                                         
 bins = np.linspace(1, max_value, num_bins)
 
 def action_to_bucket(full_action: Tuple[str, int]) -> int:
