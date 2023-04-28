@@ -32,8 +32,23 @@ If you use jupyter notebooks for development, you can now install the package an
 
 Here's how to make your conda env available in Jupyter: https://medium.com/@nrk25693/how-to-add-your-conda-environment-to-your-jupyter-notebook-in-just-4-steps-abeab8b8d084
 
+### Generating Charts
+In the visualizations folder, there should be the pickle files with the experiment results from the current Main branch model and data.
+I already generated the charts, but if you want, you can run generate_charts.py to do so yourself.
+
+### Modifications in This Branch as ofd 4/28
+
+## Chip Bucket Modification
+I changed the max_value in chip_bucket_matrix.py to be 20,000. From looking at the values from full_action, the largest was 20k.
+
+## Model Changes
+I also added an Autoencoder3 to the models and a run_training3.py which attempts to seperate the encoder/decoder and classifier and perform unsupervised training before the supervised training.
+
+I ran a grid search on it (which is what's currently in training), and found no distinct changes.
+
+
 # TODO
-* Conda integration
+* Address the action labels being 0,1,3 and never 2.
 * ................
 * ...
 * ...
