@@ -5,7 +5,6 @@ from torch import nn
 import torch.optim as optim
 import random
 
-#build encoder
 class Autoencoder(nn.Module):
     def __init__(self, num_hidden_nodes):
         super(Autoencoder, self).__init__()
