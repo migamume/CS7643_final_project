@@ -32,8 +32,5 @@ If you use jupyter notebooks for development, you can now install the package an
 
 Here's how to make your conda env available in Jupyter: https://medium.com/@nrk25693/how-to-add-your-conda-environment-to-your-jupyter-notebook-in-just-4-steps-abeab8b8d084
 
-# TODO
-* Conda integration
-* ................
-* ...
-* ...
+### More ReadMe's
+Can be found in src/holdup -> the_model and visualizations
