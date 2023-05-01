@@ -91,8 +91,11 @@ def train(model, train_loader, val_loader, num_epochs, weight_decay, pftr='stage
     optimizer = optim.Adam(model.parameters(), weight_decay=weight_decay)
     train_losses = []
     val_losses = []
+    train_accs = []
+    val_accs = []
     for epoch in range(num_epochs):
-        running_loss = 0.0
+        train_correct = 0
+        train_total = 0
         for data in train_loader:
             inputs, labels = data
             inputs = inputs.float()
@@ -103,12 +106,14 @@ def train(model, train_loader, val_loader, num_epochs, weight_decay, pftr='stage
             loss = criterion(outputs, labels)
             loss.backward()
             optimizer.step()
-            running_loss += loss.item() * inputs.size(0)
-        epoch_loss = running_loss / len(train_loader.dataset)
-        train_losses.append(epoch_loss)
-        print(f"Epoch [{epoch+1}/{num_epochs}], Training Loss: {epoch_loss:.4f}")
+            train_correct += (torch.argmax(outputs, dim=1) == labels).sum().item()
+            train_total += labels.size(0)
+        train_acc = train_correct / train_total
+        train_accs.append(train_acc)
+        print(f"Epoch [{epoch+1}/{num_epochs}], Training Accuracy: {train_acc:.4f}")
         with torch.no_grad():
-            running_loss = 0.0
+            val_correct = 0
+            val_total = 0
             for data in val_loader:
                 inputs, labels = data
                 inputs = inputs.float()
@@ -116,20 +121,21 @@ def train(model, train_loader, val_loader, num_epochs, weight_decay, pftr='stage
                 inputs = inputs.view(batch_size, -1)
                 outputs = model(inputs)
                 loss = criterion(outputs, labels)
-                running_loss += loss.item() * inputs.size(0)
-            epoch_loss = running_loss / len(val_loader.dataset)
-            val_losses.append(epoch_loss)
-            print(f"Epoch [{epoch+1}/{num_epochs}], Validation Loss: {epoch_loss:.4f}")
+                val_correct += (torch.argmax(outputs, dim=1) == labels).sum().item()
+                val_total += labels.size(0)
+            val_acc = val_correct / val_total
+            val_accs.append(val_acc)
+            print(f"Epoch [{epoch+1}/{num_epochs}], Validation Accuracy: {val_acc:.4f}")
     # Autoencoder.save(save_the_model, bbox_inches='tight')
     print("Training finished!")
     # plot the learning curve
-    plt.plot(range(1, num_epochs + 1), train_losses, label='Training Loss')
-    plt.plot(range(1, num_epochs + 1), val_losses, label='Validation Loss')
-    plt.title('Training and Validation Loss')
+    plt.plot(range(1, num_epochs + 1), train_accs, label='Training Accuracy')
+    plt.plot(range(1, num_epochs + 1), val_accs, label='Validation Accuracy')
+    plt.title('Training and Validation Accuracy')
     plt.xlabel('Epoch')
-    plt.ylabel('Loss')
+    plt.ylabel('Accuracy')
     plt.legend()
-    s = str(pftr) + '_lc_epoch_loss'
+    s = str(pftr) + '_lc_epoch_accuracy'
     plt.savefig(s)
     plt.clf()
 

@@ -40,12 +40,15 @@ The following learning curves are for the best model hyperparameters according t
 
 | Pre-flop Accuracy: 79.31% | Flop Accuracy: 83.21%|
 | :--------: | :--------: |
-| ![Image 1](./for_readme/preflop_last_possible_lc_epoch_loss.png) | ![Image 2](./for_readme/flop_last_possible_lc_epoch_loss.png) |
+| ![Image 1](./for_readme/preflop_last_possible_lc_epoch_accuracy.png) | ![Image 2](./for_readme/flop_last_possible_lc_epoch_accuracy.png) |
 | **Turn Accuracy: 90.57%**| **River Accuracy: 87.41%**|
-| ![Image 1](./for_readme/turn_last_possible_lc_epoch_loss.png) | ![Image 2](./for_readme/river_last_possible_lc_epoch_loss.png) |
+| ![Image 1](./for_readme/turn_last_possible_lc_epoch_accuracy.png) | ![Image 2](./for_readme/river_last_possible_lc_epoch_accuracy.png) |
 
+
+# Supplementary material
 
 ### Last action datasets
+
 
 | Pre-flop Accuracy: 69.52% | Flop Accuracy: 65.55%|
 | :--------: | :--------: |
@@ -54,7 +57,3 @@ The following learning curves are for the best model hyperparameters according t
 | ![Image 1](./for_readme/turn_last_action_lc_epoch_loss.png) | ![Image 2](./for_readme/river_last_action_lc_epoch_loss.png) |
 
 
-
-
-## TODO: visualizations with tuning hyperparameters
-## TODO: WRITE THE REPORT
